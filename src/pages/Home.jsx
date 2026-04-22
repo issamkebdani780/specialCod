@@ -8,6 +8,7 @@ import Integrations from '../componenets/Integrations';
 import Testimonials from '../componenets/Testimonials';
 import Pricing from '../componenets/Pricing';
 import FAQ from '../componenets/FAQ';
+import LeadForm from '../componenets/LeadForm';
 import Footer from '../componenets/Footer';
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
       <Testimonials />
       <Pricing />
       <FAQ />
+      <LeadForm />
       <Footer />
     </div>
   );

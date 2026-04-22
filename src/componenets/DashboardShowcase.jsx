@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ShoppingBag, CheckCircle, Truck, TrendingUp, Map } from 'lucide-react';
+import { ShoppingBag, CheckCircle, Truck, TrendingUp, Map as MapIcon, MoreHorizontal, User, MapPin } from 'lucide-react';
 
 const DashboardShowcase = () => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ const DashboardShowcase = () => {
     { id: 'confirm', name: t('tab_confirm'), icon: CheckCircle },
     { id: 'delivery', name: t('tab_delivery'), icon: Truck },
     { id: 'profit', name: t('tab_profit'), icon: TrendingUp },
-    { id: 'map', name: t('tab_map'), icon: Map },
+    { id: 'map', name: t('tab_map'), icon: MapIcon },
   ];
 
   return (
@@ -24,17 +24,15 @@ const DashboardShowcase = () => {
           </h2>
         </div>
 
-        {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {tabs.map((tab, index) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(index)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black transition-all ${
-                activeTab === index 
-                  ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-105' 
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black transition-all ${activeTab === index
+                  ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-105'
                   : 'bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
-              }`}
+                }`}
             >
               <tab.icon className="w-5 h-5" />
               {tab.name}
@@ -42,7 +40,6 @@ const DashboardShowcase = () => {
           ))}
         </div>
 
-        {/* Display */}
         <div className="max-w-5xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -51,47 +48,36 @@ const DashboardShowcase = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="p-8 md:p-12 rounded-[48px] dark:bg-slate-900 bg-white border dark:border-slate-800 border-slate-200 shadow-2xl relative overflow-hidden"
+              className="p-6 md:p-10 rounded-[48px] dark:bg-slate-900 bg-white border dark:border-slate-800 border-slate-200 shadow-2xl relative overflow-hidden min-h-[500px] flex flex-col"
             >
-              {/* Fake UI Content */}
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8 pb-8 border-b dark:border-white/5 border-slate-100">
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex items-center justify-between mb-8 pb-6 border-b dark:border-white/5 border-slate-100">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary">
                       {React.createElement(tabs[activeTab].icon, { className: "w-6 h-6" })}
                     </div>
                     <div>
                       <h4 className="text-xl font-black dark:text-white text-slate-900">{tabs[activeTab].name}</h4>
-                      <p className="text-sm dark:text-slate-500 text-slate-400">Real-time data visualization</p>
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest">Live System</p>
+                      </div>
                     </div>
                   </div>
+                  <button className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <MoreHorizontal className="w-5 h-5 text-slate-400" />
+                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[300px] content-center">
-                  <div className="space-y-6">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="h-4 dark:bg-white/5 bg-slate-50 rounded-full w-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${Math.random() * 60 + 20}%` }}
-                          transition={{ duration: 1, delay: 0.3 }}
-                          className="h-full bg-primary/40 rounded-full"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <div className="w-48 h-48 rounded-full border-[12px] dark:border-white/5 border-slate-50 flex items-center justify-center relative">
-                      <div className="text-4xl font-black text-primary">74%</div>
-                      <svg className="absolute inset-0 w-full h-full -rotate-90">
-                        <circle cx="96" cy="96" r="84" fill="none" stroke="currentColor" strokeWidth="12" strokeDasharray="527" strokeDashoffset="137" className="text-primary" />
-                      </svg>
-                    </div>
-                  </div>
+                <div className="flex-1 overflow-hidden">
+                  {activeTab === 0 && <OrdersUI />}
+                  {activeTab === 1 && <ConfirmationUI />}
+                  {activeTab === 2 && <DeliveryUI />}
+                  {activeTab === 3 && <ProfitabilityUI />}
+                  {activeTab === 4 && <MapUI />}
                 </div>
               </div>
-              
-              {/* Background Decorative */}
+
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-primary/5 blur-[100px] rounded-full" />
             </motion.div>
           </AnimatePresence>
@@ -100,5 +86,193 @@ const DashboardShowcase = () => {
     </section>
   );
 };
+
+// UI Components
+const OrdersUI = () => (
+  <div className="space-y-4">
+    {[1, 2, 3, 4].map(i => (
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: i * 0.1 }}
+        key={i}
+        className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800"
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+            <User className="w-4 h-4 text-primary" />
+          </div>
+          <div>
+            <div className="text-sm font-black dark:text-white">Client #00{i * 12}</div>
+            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Alger, Birkhadem</div>
+          </div>
+        </div>
+        <div className="flex items-center gap-8">
+          <div className="text-right">
+            <div className="text-xs font-black dark:text-white">4,200 DA</div>
+            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Cuisine & Maison</div>
+          </div>
+          <div className="px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-black uppercase tracking-widest">En attente</div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+);
+
+const ConfirmationUI = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full items-center">
+    <div className="space-y-6">
+      {[
+        { label: 'Total Appels', value: '452', color: 'bg-primary' },
+        { label: 'Confirmé', value: '312', color: 'bg-emerald-500' },
+        { label: 'Annulé', value: '48', color: 'bg-rose-500' },
+      ].map((item, i) => (
+        <div key={i} className="space-y-2">
+          <div className="flex justify-between text-xs font-black uppercase tracking-wider text-slate-400">
+            <span>{item.label}</span>
+            <span className="text-primary">{item.value}</span>
+          </div>
+          <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.random() * 50 + 40}%` }}
+              className={`h-full ${item.color} rounded-full`}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+    <div className="flex justify-center relative">
+      <svg className="w-48 h-48 -rotate-90">
+        <circle cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-slate-100 dark:text-slate-800" />
+        <motion.circle
+          initial={{ strokeDashoffset: 502 }}
+          animate={{ strokeDashoffset: 150 }}
+          transition={{ duration: 1.5 }}
+          cx="96" cy="96" r="80" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray="502" className="text-primary" />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-4xl font-black dark:text-white">74%</span>
+        <span className="text-[10px] font-black uppercase text-slate-400">Taux Global</span>
+      </div>
+    </div>
+  </div>
+);
+
+const DeliveryUI = () => (
+  <div className="grid grid-cols-2 gap-4">
+    {[
+      { name: 'Kamel Express', status: 'En route', count: 24, color: 'emerald' },
+      { name: 'Yassir Pro', status: 'Dépôt', count: 18, color: 'amber' },
+      { name: 'Zaki Delivery', status: 'En route', count: 32, color: 'emerald' },
+      { name: 'Amine Trans', status: 'Chargement', count: 12, color: 'blue' },
+    ].map((driver, i) => (
+      <div key={i} className="p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50">
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+            <Truck className="w-4 h-4 text-slate-500" />
+          </div>
+          <span className={`text-[10px] font-black uppercase text-${driver.color}-500`}>{driver.status}</span>
+        </div>
+        <div className="text-sm font-black dark:text-white mb-1">{driver.name}</div>
+        <div className="text-xs text-slate-400 font-bold">{driver.count} colis scannés</div>
+      </div>
+    ))}
+  </div>
+);
+
+const ProfitabilityUI = () => (
+  <div className="h-full flex flex-col">
+    <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="text-center">
+        <div className="text-[10px] font-black uppercase text-slate-400 mb-1">Chiffre d'affaires</div>
+        <div className="text-xl font-black text-primary">850,000 DA</div>
+      </div>
+      <div className="text-center">
+        <div className="text-[10px] font-black uppercase text-slate-400 mb-1">Dépenses Pub</div>
+        <div className="text-xl font-black text-rose-500">120,000 DA</div>
+      </div>
+      <div className="text-center">
+        <div className="text-[10px] font-black uppercase text-slate-400 mb-1">Bénéfice Net</div>
+        <div className="text-xl font-black text-emerald-500">420,000 DA</div>
+      </div>
+    </div>
+    <div className="flex-1 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 relative p-4 flex items-end">
+      <div className="absolute inset-0 p-4 flex items-end justify-between">
+        {[40, 70, 45, 90, 65, 80, 55].map((h, i) => (
+          <motion.div
+            key={i}
+            initial={{ height: 0 }}
+            animate={{ height: `${h}%` }}
+            transition={{ delay: i * 0.1 }}
+            className="w-[10%] bg-primary/20 rounded-t-lg relative group cursor-pointer"
+          >
+            <div className="absolute inset-x-0 bottom-0 bg-primary h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const MapUI = () => (
+  <div className="h-full flex flex-col items-center justify-center relative bg-slate-50/50 dark:bg-slate-950/30 rounded-3xl overflow-hidden p-8">
+    <div className="absolute top-4 left-4 p-4 space-y-3 z-20">
+      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-3 rounded-2xl border dark:border-white/5 shadow-xl">
+        <div className="text-xs font-black dark:text-white flex items-center gap-2 mb-2">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          Alger: 74% (+5%)
+        </div>
+        <div className="text-xs font-black dark:text-white flex items-center gap-2 mb-2">
+          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          Oran: 65% (+3%)
+        </div>
+        <div className="text-xs font-black dark:text-white flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          Sétif: 58% (+8%)
+        </div>
+      </div>
+    </div>
+
+    <div className="relative w-full h-full max-h-[350px] flex items-center justify-center">
+      <AlgeriaMap className="w-full h-full text-slate-200 dark:text-slate-800 opacity-50" />
+
+      {/* Hotspots */}
+      <div className="absolute top-[15%] left-[55%]">
+        <MapPinSmall color="text-emerald-500" />
+      </div>
+      <div className="absolute top-[22%] left-[42%]">
+        <MapPinSmall color="text-primary" />
+      </div>
+      <div className="absolute top-[30%] left-[65%]">
+        <MapPinSmall color="text-amber-500" />
+      </div>
+    </div>
+
+    <div className="mt-6 text-center z-20">
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
+        <MapIcon className="w-3 h-3 text-primary" />
+        <p className="text-[10px] font-black text-primary uppercase tracking-widest">Couverture Nationale: 58 Wilayas</p>
+      </div>
+    </div>
+  </div>
+);
+
+const AlgeriaMap = ({ className }) => (
+  <svg className={className} viewBox="0 0 500 500" fill="currentColor">
+    <path d="M120,40 L150,35 L180,32 L220,35 L260,30 L290,35 L330,45 L360,60 L380,85 L370,120 L350,160 L320,200 L280,250 L240,300 L200,380 L160,320 L130,250 L110,180 L105,120 L110,80 Z" />
+  </svg>
+);
+
+const MapPinSmall = ({ color }) => (
+  <div className="relative group cursor-pointer">
+    <motion.div
+      animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+      transition={{ duration: 2, repeat: Infinity }}
+      className={`absolute -inset-2 rounded-full bg-current opacity-20 ${color}`}
+    />
+    <div className={`w-3 h-3 rounded-full border-2 border-white dark:border-slate-900 shadow-lg ${color} bg-current`} />
+  </div>
+);
 
 export default DashboardShowcase;
