@@ -12,8 +12,8 @@ const Integrations = () => {
     { name: 'WhatsApp', icon: MessageCircle, color: 'text-emerald-500' },
     { name: 'Google Sheets', icon: FileText, color: 'text-green-600' },
     { name: 'API Transport', icon: Layers, color: 'text-primary' },
-    { name: 'RiseConfirm', icon: CheckCircle2, color: 'text-primary' },
-    { name: 'RiseCart', icon: ShoppingCart, color: 'text-primary' },
+    { name: 'RiseConfirm', image: '/ecosystem/riseconfirem.jpg', color: 'border-primary/20' },
+    { name: 'RiseCart', image: '/ecosystem/risecart.jpg', color: 'border-primary/20' },
   ];
 
   return (
@@ -35,10 +35,14 @@ const Integrations = () => {
               whileHover={{ scale: 1.1, y: -10 }}
               className="flex flex-col items-center gap-4 group"
             >
-              <div className={`w-20 h-20 rounded-[24px] dark:bg-slate-900 bg-slate-50 border dark:border-slate-800 border-slate-100 flex items-center justify-center shadow-lg group-hover:shadow-primary/20 transition-all ${p.color}`}>
-                <p.icon className="w-10 h-10" />
+              <div className={`w-20 h-20 rounded-[24px] dark:bg-slate-900 bg-slate-50 border dark:border-slate-800 border-slate-100 flex items-center justify-center shadow-lg group-hover:shadow-primary/20 transition-all overflow-hidden ${p.color}`}>
+                {p.image ? (
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                ) : (
+                  <p.icon className={`w-10 h-10 ${p.color}`} />
+                )}
               </div>
-              <span className="text-sm font-black dark:text-slate-400 text-slate-500">{p.name}</span>
+              <span className="text-sm font-black dark:text-white text-slate-500">{p.name}</span>
             </motion.div>
           ))}
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ShoppingBag, CheckCircle, Truck, TrendingUp, Map as MapIcon, MoreHorizontal, User, MapPin } from 'lucide-react';
+import MapUI from './Mapui';
 
 const DashboardShowcase = () => {
   const { t } = useTranslation();
@@ -24,13 +25,13 @@ const DashboardShowcase = () => {
           </h2>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex overflow-x-auto no-scrollbar md:flex-wrap md:justify-center gap-2 mb-12 pb-4 px-6 -mx-6 md:px-0 md:mx-0 snap-x">
           {tabs.map((tab, index) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(index)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black transition-all ${activeTab === index
-                  ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-105'
+              className={`flex-shrink-0 snap-center flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 rounded-full font-black transition-all ${activeTab === index
+                  ? 'bg-primary text-white shadow-xl shadow-primary/20 md:scale-105'
                   : 'bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
             >
@@ -212,66 +213,6 @@ const ProfitabilityUI = () => (
         ))}
       </div>
     </div>
-  </div>
-);
-
-const MapUI = () => (
-  <div className="h-full flex flex-col items-center justify-center relative bg-slate-50/50 dark:bg-slate-950/30 rounded-3xl overflow-hidden p-8">
-    <div className="absolute top-4 left-4 p-4 space-y-3 z-20">
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-3 rounded-2xl border dark:border-white/5 shadow-xl">
-        <div className="text-xs font-black dark:text-white flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          Alger: 74% (+5%)
-        </div>
-        <div className="text-xs font-black dark:text-white flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          Oran: 65% (+3%)
-        </div>
-        <div className="text-xs font-black dark:text-white flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          Sétif: 58% (+8%)
-        </div>
-      </div>
-    </div>
-
-    <div className="relative w-full h-full max-h-[350px] flex items-center justify-center">
-      <AlgeriaMap className="w-full h-full text-slate-200 dark:text-slate-800 opacity-50" />
-
-      {/* Hotspots */}
-      <div className="absolute top-[15%] left-[55%]">
-        <MapPinSmall color="text-emerald-500" />
-      </div>
-      <div className="absolute top-[22%] left-[42%]">
-        <MapPinSmall color="text-primary" />
-      </div>
-      <div className="absolute top-[30%] left-[65%]">
-        <MapPinSmall color="text-amber-500" />
-      </div>
-    </div>
-
-    <div className="mt-6 text-center z-20">
-      <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
-        <MapIcon className="w-3 h-3 text-primary" />
-        <p className="text-[10px] font-black text-primary uppercase tracking-widest">Couverture Nationale: 58 Wilayas</p>
-      </div>
-    </div>
-  </div>
-);
-
-const AlgeriaMap = ({ className }) => (
-  <svg className={className} viewBox="0 0 500 500" fill="currentColor">
-    <path d="M120,40 L150,35 L180,32 L220,35 L260,30 L290,35 L330,45 L360,60 L380,85 L370,120 L350,160 L320,200 L280,250 L240,300 L200,380 L160,320 L130,250 L110,180 L105,120 L110,80 Z" />
-  </svg>
-);
-
-const MapPinSmall = ({ color }) => (
-  <div className="relative group cursor-pointer">
-    <motion.div
-      animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
-      transition={{ duration: 2, repeat: Infinity }}
-      className={`absolute -inset-2 rounded-full bg-current opacity-20 ${color}`}
-    />
-    <div className={`w-3 h-3 rounded-full border-2 border-white dark:border-slate-900 shadow-lg ${color} bg-current`} />
   </div>
 );
 

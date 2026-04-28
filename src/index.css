@@ -1,11 +1,11 @@
 @import "tailwindcss";
-@variant dark (&:where(.dark, .dark *));
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Outfit:wght@100..900&display=swap');
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-primary: #00a2ff;
   --color-primary-hover: #0088dd;
-  
+
   --font-sans: "Outfit", "Cairo", ui-sans-serif, system-ui, sans-serif;
   --font-arabic: "Cairo", sans-serif;
 }
@@ -17,8 +17,14 @@
 }
 
 html.dark {
-  --bg-color: #020617; /* slate-950 */
-  --text-color: #ffffff;
+  --bg-color: #020617;
+  /* slate-950 */
+  --text-color: #f8fafc;
+  /* slate-50 */
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

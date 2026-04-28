@@ -41,10 +41,12 @@ const Testimonials = () => {
                 {rev.text}
               </p>
               <div className="flex items-center gap-4 pt-6 border-t dark:border-white/5 border-slate-100">
-                <div className="w-12 h-12 rounded-full bg-primary/20" />
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-black text-sm">
+                  {rev.author.split(' ').map(n => n[0]).join('')}
+                </div>
                 <div>
                   <div className="font-black dark:text-white text-slate-900">{rev.author}</div>
-                  <div className="text-xs dark:text-slate-500 text-slate-400">{rev.role}</div>
+                  <div className="text-xs dark:text-slate-400 text-slate-400">{rev.role}</div>
                 </div>
               </div>
             </motion.div>

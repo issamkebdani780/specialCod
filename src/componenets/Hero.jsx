@@ -7,24 +7,9 @@ const Hero = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   
-  const [theme, setTheme] = React.useState(() => {
-    if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    }
-    return 'dark';
-  });
-
-  React.useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, []);
 
   const titleHtml = t('hero_title')
-    .replace(/text-turquoise-400/g, 'text-primary')
-    .replace(/text-white/g, theme === 'dark' ? 'text-white' : 'text-slate-900');
+    .replace(/text-turquoise-400/g, 'text-primary');
 
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden transition-colors duration-500">
@@ -47,15 +32,11 @@ const Hero = () => {
               </div>
               
               <h1 
-                className={`text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 ${
-                  theme === 'dark' ? 'text-white' : 'text-slate-900'
-                } ${isRTL ? 'font-arabic leading-[1.3]' : ''}`}
+                className={`text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 text-slate-900 dark:text-white ${isRTL ? 'font-arabic leading-[1.3]' : ''}`}
                 dangerouslySetInnerHTML={{ __html: titleHtml }}
               />
               
-              <p className={`text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 ${
-                theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-              }`}>
+              <p className={`text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 text-slate-600 dark:text-slate-400`}>
                 {t('hero_subtitle')}
               </p>
 
@@ -74,20 +55,14 @@ const Hero = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#demo"
-                  className={`w-full sm:w-auto px-8 py-4 border rounded-2xl flex items-center justify-center gap-2 transition-all font-bold ${
-                    theme === 'dark' 
-                      ? 'bg-slate-900 border-slate-800 text-white hover:bg-slate-800' 
-                      : 'bg-white border-slate-200 text-slate-900 hover:bg-slate-50'
-                  }`}
+                  className={`w-full sm:w-auto px-8 py-4 border rounded-2xl flex items-center justify-center gap-2 transition-all font-bold bg-white border-slate-200 text-slate-900 hover:bg-slate-50 dark:bg-slate-900 dark:border-slate-800 dark:text-white dark:hover:bg-slate-800`}
                 >
                   <PlayCircle className="w-5 h-5 text-primary" />
                   {t('hero_cta_demo')}
                 </motion.a>
               </div>
 
-              <div className={`flex flex-wrap items-center justify-center lg:justify-start gap-6 ${
-                theme === 'dark' ? 'text-slate-500' : 'text-slate-400'
-              }`}>
+              <div className={`flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-400 dark:text-slate-500`}>
                 <div className="flex items-center gap-2 group cursor-help">
                   <ShieldCheck className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                   <span className="text-sm font-medium">{t('badge_no_card')}</span>
@@ -111,18 +86,14 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative px-4 sm:px-0"
             >
-              <div className={`border rounded-[32px] p-6 shadow-2xl relative transition-all duration-500 hover:shadow-primary/10 group/card ${
-                theme === 'dark' 
-                  ? 'bg-slate-900 border-slate-800 shadow-black/50' 
-                  : 'bg-white border-slate-100 shadow-slate-200/50'
-              }`}>
+              <div className={`border rounded-[32px] p-6 shadow-2xl relative transition-all duration-500 hover:shadow-primary/10 group/card bg-white border-slate-100 shadow-slate-200/50 dark:bg-slate-900 dark:border-slate-800 dark:shadow-black/50`}>
                 
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center animate-pulse">
                       <BarChart3 className="w-4 h-4 text-primary" />
                     </div>
-                    <span className={`text-sm font-bold ${theme === 'dark' ? 'text-white/80' : 'text-slate-700'}`}>Dashboard Overview</span>
+                    <span className={`text-sm font-bold text-slate-700 dark:text-white/80`}>Dashboard Overview</span>
                   </div>
                   <div className="flex gap-1.5">
                     <div className="w-2 h-2 rounded-full bg-red-500 animate-bounce [animation-delay:-0.1s]" />
@@ -134,11 +105,9 @@ const Hero = () => {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
-                    className={`border p-4 rounded-2xl transition-colors cursor-pointer ${
-                      theme === 'dark' ? 'bg-slate-950 border-slate-800 hover:bg-slate-800/50' : 'bg-slate-50 border-slate-100 hover:bg-slate-200/50'
-                    }`}
+                    className="border p-4 rounded-2xl transition-colors cursor-pointer bg-slate-50 border-slate-100 hover:bg-slate-200/50 dark:bg-slate-950 dark:border-slate-800 dark:hover:bg-slate-800/50"
                   >
-                    <div className={`text-[10px] font-black uppercase mb-1 ${theme === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{t('stat_confirm')}</div>
+                    <div className={`text-[10px] font-black uppercase mb-1 text-slate-400 dark:text-slate-500`}>{t('stat_confirm')}</div>
                     <div className="text-2xl font-black text-primary tracking-tight"><Counter target={74.2} duration={1.5} decimals={1} />%</div>
                     <div className="text-[10px] text-primary font-bold flex items-center gap-1">
                       <TrendingUpIcon className="w-3 h-3" />
@@ -147,11 +116,9 @@ const Hero = () => {
                   </motion.div>
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
-                    className={`border p-4 rounded-2xl transition-colors cursor-pointer ${
-                      theme === 'dark' ? 'bg-slate-950 border-slate-800 hover:bg-slate-800/50' : 'bg-slate-50 border-slate-100 hover:bg-slate-200/50'
-                    }`}
+                    className="border p-4 rounded-2xl transition-colors cursor-pointer bg-slate-50 border-slate-100 hover:bg-slate-200/50 dark:bg-slate-950 dark:border-slate-800 dark:hover:bg-slate-800/50"
                   >
-                    <div className={`text-[10px] font-black uppercase mb-1 ${theme === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{t('stat_returns')}</div>
+                    <div className={`text-[10px] font-black uppercase mb-1 text-slate-400 dark:text-slate-500`}>{t('stat_returns')}</div>
                     <div className="text-2xl font-black text-rose-500 tracking-tight"><Counter target={18.5} duration={1.5} decimals={1} />%</div>
                     <div className="text-[10px] text-rose-500 font-bold flex items-center gap-1">
                       <TrendingDownIcon className="w-3 h-3" />
@@ -160,10 +127,8 @@ const Hero = () => {
                   </motion.div>
                 </div>
 
-                <div className={`border p-6 rounded-2xl mb-2 transition-colors ${
-                  theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-100'
-                }`}>
-                  <div className={`text-sm font-bold flex items-center justify-between mb-4 ${theme === 'dark' ? 'text-white/80' : 'text-slate-700'}`}>
+                <div className={`border p-6 rounded-2xl mb-2 transition-colors bg-slate-50 border-slate-100 dark:bg-slate-950 dark:border-slate-800`}>
+                  <div className={`text-sm font-bold flex items-center justify-between mb-4 text-slate-700 dark:text-white/80`}>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-primary" />
                       {t('stat_wilayas')}
@@ -181,13 +146,13 @@ const Hero = () => {
                     ].map((w, idx) => (
                       <div key={w.name} className="space-y-1.5 group/item cursor-pointer">
                         <div className="flex items-center justify-between">
-                          <span className={`text-xs font-bold transition-colors group-hover/item:text-primary ${theme === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>{w.name}</span>
+                          <span className={`text-xs font-bold transition-colors group-hover/item:text-primary text-slate-500 dark:text-slate-400`}>{w.name}</span>
                           <div className="flex items-center gap-4">
-                            <span className={`text-xs font-black ${theme === 'dark' ? 'text-white/80' : 'text-slate-700'}`}>{w.count} cmds</span>
+                            <span className={`text-xs font-black text-slate-700 dark:text-white/80`}>{w.count} cmds</span>
                             <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-md font-black">{w.roi}</span>
                           </div>
                         </div>
-                        <div className={`h-1.5 w-full rounded-full overflow-hidden ${theme === 'dark' ? 'bg-slate-800' : 'bg-slate-200'}`}>
+                        <div className={`h-1.5 w-full rounded-full overflow-hidden bg-slate-200 dark:bg-slate-800`}>
                           <motion.div 
                             initial={{ width: 0 }}
                             animate={{ width: `${w.progress}%` }}
@@ -207,17 +172,13 @@ const Hero = () => {
                   animate={{ y: [0, -10, 0], x: isRTL ? 15 : -15 }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   whileHover={{ scale: 1.1, zIndex: 30 }}
-                  className={`absolute top-1/3 p-4 rounded-2xl shadow-2xl border z-20 cursor-pointer transition-shadow hover:shadow-primary/30 ${
+                  className={`absolute top-1/3 p-4 rounded-2xl shadow-2xl border z-20 cursor-pointer transition-shadow hover:shadow-primary/30 bg-white border-slate-100 text-slate-900 shadow-slate-200/50 dark:bg-primary dark:border-white/20 dark:text-white dark:shadow-primary/40 ${
                     isRTL ? 'left-[-32px]' : 'right-[-32px]'
-                  } ${
-                    theme === 'dark' 
-                      ? 'bg-primary border-white/20 text-white shadow-primary/40' 
-                      : 'bg-white border-slate-100 text-slate-900 shadow-slate-200/50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="bg-white/20 dark:bg-white/20 bg-primary/10 p-2 rounded-lg">
-                      <Truck className={`w-4 h-4 ${theme === 'dark' ? 'text-white' : 'text-primary'}`} />
+                    <div className="bg-primary/10 dark:bg-white/20 p-2 rounded-lg">
+                      <Truck className={`w-4 h-4 text-primary dark:text-white`} />
                     </div>
                     <div className="whitespace-nowrap">
                       <div className="text-[10px] font-black uppercase opacity-70 tracking-wider">{t('stat_delivery')}</div>
@@ -231,12 +192,8 @@ const Hero = () => {
                   animate={{ y: [0, 10, 0], x: isRTL ? -15 : 15 }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   whileHover={{ scale: 1.1, zIndex: 30 }}
-                  className={`absolute bottom-1/4 p-4 rounded-2xl shadow-2xl border z-20 cursor-pointer transition-shadow hover:shadow-black/20 ${
+                  className={`absolute bottom-1/4 p-4 rounded-2xl shadow-2xl border z-20 cursor-pointer transition-shadow hover:shadow-black/20 bg-white border-slate-100 text-slate-900 shadow-slate-200/50 dark:bg-slate-800 dark:border-white/10 dark:text-white dark:shadow-black/40 ${
                     isRTL ? 'right-[-32px]' : 'left-[-32px]'
-                  } ${
-                    theme === 'dark' 
-                      ? 'bg-slate-800 border-white/10 text-white shadow-black/40' 
-                      : 'bg-white border-slate-100 text-slate-900 shadow-slate-200/50'
                   }`}
                 >
                   <div className="flex items-center gap-3">

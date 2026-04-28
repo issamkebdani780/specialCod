@@ -47,14 +47,14 @@ const Pricing = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-black dark:text-white text-slate-900">{plan.name}</h3>
-                  <p className="text-sm dark:text-slate-500 text-slate-400">{plan.desc}</p>
+                  <p className="text-sm dark:text-slate-400 text-slate-500 font-bold">{plan.desc}</p>
                 </div>
               </div>
 
               <div className="mb-8">
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-black dark:text-white text-slate-900">${plan.price}</span>
-                  <span className="text-slate-400 text-xs font-bold">{t('price_month')}</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-xs font-bold">{t('price_month')}</span>
                 </div>
               </div>
 
@@ -64,7 +64,7 @@ const Pricing = () => {
                     <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
                       <Check className="w-3 h-3" />
                     </div>
-                    <span className="text-sm dark:text-slate-400 text-slate-600 font-medium">{t('price_feature')}</span>
+                    <span className="text-sm dark:text-slate-300 text-slate-600 font-bold">{t('price_feature')}</span>
                   </div>
                 ))}
               </div>

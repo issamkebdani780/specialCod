@@ -43,7 +43,7 @@ const LeadForm = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-lg dark:text-slate-400 text-slate-500"
+              className="text-lg dark:text-slate-300 text-slate-500 font-medium"
             >
               {t('lead_form_subtitle')}
             </motion.p>
@@ -57,7 +57,7 @@ const LeadForm = () => {
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Name */}
               <div className="space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_name')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_name')}</label>
                 <div className="relative group">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <input 
@@ -72,7 +72,7 @@ const LeadForm = () => {
 
               {/* Phone */}
               <div className="space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_phone')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_phone')}</label>
                 <div className="relative group">
                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <input 
@@ -87,7 +87,7 @@ const LeadForm = () => {
 
               {/* Country */}
               <div className="space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_country')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_country')}</label>
                 <div className="relative group">
                   <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <select 
@@ -107,7 +107,7 @@ const LeadForm = () => {
 
               {/* Orders */}
               <div className="space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_orders')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_orders')}</label>
                 <div className="relative group">
                   <ShoppingCart className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <input 
@@ -121,7 +121,7 @@ const LeadForm = () => {
 
               {/* Store */}
               <div className="col-span-1 md:col-span-2 space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_store')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_store')}</label>
                 <div className="relative group">
                   <Store className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <input 
@@ -135,12 +135,12 @@ const LeadForm = () => {
 
               {/* Need */}
               <div className="col-span-1 md:col-span-2 space-y-2">
-                <label className="text-sm font-black dark:text-white/70 text-slate-600 px-1">{t('field_need')}</label>
+                <label className="text-sm font-black dark:text-slate-300 text-slate-600 px-1">{t('field_need')}</label>
                 <div className="relative group">
                   <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
                   <textarea 
                     rows="3"
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl dark:bg-slate-950 bg-slate-50 border dark:border-slate-800 border-slate-100 dark:text-white text-slate-900 outline-none focus:border-primary transition-all font-medium resize-none"
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl dark:bg-slate-950 bg-slate-50 border dark:border-slate-800 border-slate-100 dark:text-white text-slate-900 outline-none focus:border-primary transition-all font-medium resize-none dark:placeholder-slate-600"
                     onChange={(e) => setFormData({...formData, need: e.target.value})}
                   />
                 </div>

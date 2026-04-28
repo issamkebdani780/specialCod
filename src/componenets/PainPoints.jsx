@@ -41,7 +41,7 @@ const PainPoints = () => {
               <div className="w-12 h-12 rounded-2xl bg-rose-500/10 flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all text-rose-500">
                 <AlertCircle className="w-6 h-6" />
               </div>
-              <p className="text-lg font-bold dark:text-white/80 text-slate-700 leading-snug">
+              <p className="text-lg font-bold dark:text-white text-slate-700 leading-snug">
                 {point}
               </p>
             </motion.div>

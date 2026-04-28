@@ -45,7 +45,7 @@ const FAQ = () => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="px-8 pb-8 text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <div className="px-8 pb-8 text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
                       {item.a}
                     </div>
                   </motion.div>
