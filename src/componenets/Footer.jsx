@@ -24,7 +24,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="max-w-xs dark:text-slate-500 text-slate-500 text-sm font-bold leading-relaxed mb-8">
-              La plateforme tout-en-un pour les e-commerçants COD en Afrique. Pilotez votre croissance avec la data.
+              {t('footer_tagline')}
             </p>
             <div className="flex gap-4">
               {socialIcons.map((social, i) => (
@@ -38,7 +38,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h5 className="font-black dark:text-white text-slate-900 mb-6 uppercase text-xs tracking-widest">Légal</h5>
+            <h5 className="font-black dark:text-white text-slate-900 mb-6 uppercase text-xs tracking-widest">{t('footer_legal_title')}</h5>
             <ul className="space-y-4">
               <li><a href="#" className="text-sm dark:text-slate-500 text-slate-500 hover:text-primary transition-colors font-bold">{t('footer_legals')}</a></li>
               <li><a href="#" className="text-sm dark:text-slate-500 text-slate-500 hover:text-primary transition-colors font-bold">{t('footer_cgv')}</a></li>
@@ -47,7 +47,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h5 className="font-black dark:text-white text-slate-900 mb-6 uppercase text-xs tracking-widest">Contact</h5>
+            <h5 className="font-black dark:text-white text-slate-900 mb-6 uppercase text-xs tracking-widest">{t('footer_contact_title')}</h5>
             <ul className="space-y-4">
               <li><a href="#" className="text-sm dark:text-slate-500 text-slate-500 hover:text-primary transition-colors font-bold flex items-center gap-2"><Mail className="w-4 h-4" /> {t('footer_contact')}</a></li>
               <li className="text-sm dark:text-slate-500 text-slate-500 font-bold flex items-center gap-2"><Phone className="w-4 h-4" /> 0665584456</li>
