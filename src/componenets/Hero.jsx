@@ -93,7 +93,7 @@ const Hero = () => {
                     <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center animate-pulse">
                       <BarChart3 className="w-4 h-4 text-primary" />
                     </div>
-                    <span className={`text-sm font-bold text-slate-700 dark:text-white/80`}>Dashboard Overview</span>
+                    <span className={`text-sm font-bold text-slate-700 dark:text-white/80`}>{t('dashboard_overview')}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <div className="w-2 h-2 rounded-full bg-red-500 animate-bounce [animation-delay:-0.1s]" />
